@@ -1,4 +1,4 @@
-function TodoCount(props) {
+function TodoCounter(props) {
 	return (
 		<h1>
 			Completaste
