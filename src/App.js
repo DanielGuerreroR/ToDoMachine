@@ -1,31 +1,43 @@
 import "./App.css";
-import { TodoItem } from "./TodoItem";
 import { TodoCounter } from "./TodoCounter";
 import { TodoSearch } from "./TodoSearch";
+import { TodoList } from "./TodoList";
+import { TodoItem } from "./TodoItem";
+import { CreateTodoButton } from "./CreateTodoButton";
+import React from "react";
+
+const defaultTodos = [
+	{ text: "Cortar cebolla", completed: true },
+	{ text: "Tomar el curso de Intro a React.js", completed: false },
+	{ text: "Llorar con la llorona", completed: false },
+	{ text: "lalalala", completed: false },
+];
 
 function App() {
 	return (
-		<div className="App">
+		<React.Fragment>
 			{/* Estructura de la aplicacion */}
 
 			{/* Contador de to do */}
-			<TodoCounter />
+			<TodoCounter completed={16} total={25} />
 
 			{/* Input de filtrar */}
 			<TodoSearch />
 
 			{/* Lista de to do */}
 			<TodoList>
-				{/* Insertando Componente de React en otro componente de React */}
-				<TodoItem />
-				{/* Para mostrala varias veces podemos simplemente pegarla varias veces */}
-				<TodoItem />
-				<TodoItem />
+				{defaultTodos.map((todo) => (
+					<TodoItem
+						key={todo.text}
+						text={todo.text}
+						completed={todo.completed}
+					/>
+				))}
 			</TodoList>
 
 			{/* Creador de to do */}
 			<CreateTodoButton />
-		</div>
+		</React.Fragment>
 	);
 }
 

@@ -7,3 +7,5 @@ function TodoCounter(props) {
 		</h1>
 	);
 }
+
+export { TodoCounter };
