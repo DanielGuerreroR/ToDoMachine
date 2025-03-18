@@ -1,10 +1,9 @@
-import "./App.css";
+import React from "react";
 import { TodoCounter } from "./TodoCounter";
 import { TodoSearch } from "./TodoSearch";
 import { TodoList } from "./TodoList";
 import { TodoItem } from "./TodoItem";
 import { CreateTodoButton } from "./CreateTodoButton";
-import React from "react";
 
 const defaultTodos = [
 	{ text: "Cortar cebolla", completed: true },
@@ -15,7 +14,7 @@ const defaultTodos = [
 
 function App() {
 	return (
-		<React.Fragment>
+		<>
 			{/* Estructura de la aplicacion */}
 
 			{/* Contador de to do */}
@@ -37,7 +36,7 @@ function App() {
 
 			{/* Creador de to do */}
 			<CreateTodoButton />
-		</React.Fragment>
+		</>
 	);
 }
 
