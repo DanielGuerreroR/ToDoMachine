@@ -38,6 +38,31 @@ function App() {
 		return todoText.includes(searchText);
 	});
 
+	//Funcion actualizadora de estado
+	const completeTodo = (text) => {
+		//Nuevo array de todos
+		const newTodos = [...todos];
+		//Saber cual todo modificar
+		const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+		//Actualizar estado de Todo
+		newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+		//Mandar nuevo array al actualizador
+		setTodos(newTodos);
+	};
+
+	//Funcion Borradora de ToDos
+	const deleteTodo = (text) => {
+		//Nuevo array de todos
+		const newTodos = [...todos];
+		//Saber cual todo modificar
+		const todoIndex = newTodos.findIndex((todo) => todo.text == text);
+		//Eliminar Todo del Array
+		//Metodo para cortar elementos (indice,cantidad de elementos a retirar)
+		newTodos.splice(todoIndex, 1);
+		//Mandar nuevo array al actualizador
+		setTodos(newTodos);
+	};
+
 	return (
 		<>
 			{/* Estructura de la aplicacion */}
@@ -55,6 +80,8 @@ function App() {
 						key={todo.text}
 						text={todo.text}
 						completed={todo.completed}
+						onComplete={() => completeTodo(todo.text)}
+						onDelete={() => deleteTodo(todo.text)}
 					/>
 				))}
 			</TodoList>
