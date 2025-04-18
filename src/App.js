@@ -13,14 +13,41 @@ const defaultTodos = [
 	{ text: "LALALALALALA", completed: false },
 	{ text: "usar estados derivados", completed: true },
 ];
+//Comando de crear
+//localStorage.setItem('TODOS_V1',defaultTodos)
+//Comando de borrar
+//localStorage.removeItem('TODOS_V1')
 
 function App() {
+	//Variable para guardar elmentos de local storage
+	const localStorageTodos = localStorage.getItem("TODOS_V1");
+	//Revisar contenido en localStorage
+	let parsedTodos; //variable de guardar todos
+
+	if (!localStorageTodos) {
+		//Si no hay nada en localStorage/no existe
+		localStorage.setItem("TODOS_V1", JSON.stringify(defaultTodos));
+		parsedTodos = defaultTodos;
+	} else {
+		//Si tenemos contenido
+		//Convertir local storage en JS
+		parsedTodos = JSON.parse(localStorageTodos);
+	}
+
+	//Estado de Todos
+	const [todos, setTodos] = React.useState(parsedTodos);
+
+	//Funcion actualiza estado y localStorage de los todos
+	const saveTodos = (newTodos) => {
+		//guarda el nuevo array en localstorage
+		localStorage.setItem("TODOS_V1", JSON.stringify(newTodos));
+		//acutaliza el nuevo estado con el nuevo array
+		setTodos(newTodos);
+	};
+
 	//Estado del Componente TodoSearch
 	const [searchValue, setSearchValue] = React.useState("");
 	console.log("Los usuarios buscan todos de " + searchValue);
-
-	//Estado de Todos
-	const [todos, setTodos] = React.useState(defaultTodos);
 
 	//ESTADOS DERIVADOS
 	//Todos completados
@@ -47,7 +74,7 @@ function App() {
 		//Actualizar estado de Todo
 		newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
 		//Mandar nuevo array al actualizador
-		setTodos(newTodos);
+		saveTodos(newTodos);
 	};
 
 	//Funcion Borradora de ToDos
@@ -60,7 +87,7 @@ function App() {
 		//Metodo para cortar elementos (indice,cantidad de elementos a retirar)
 		newTodos.splice(todoIndex, 1);
 		//Mandar nuevo array al actualizador
-		setTodos(newTodos);
+		saveTodos(newTodos);
 	};
 
 	return (
