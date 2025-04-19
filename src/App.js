@@ -18,32 +18,39 @@ const defaultTodos = [
 //Comando de borrar
 //localStorage.removeItem('TODOS_V1')
 
-function App() {
+function useLocalStorage(itemName, initialValue) {
 	//Variable para guardar elmentos de local storage
-	const localStorageTodos = localStorage.getItem("TODOS_V1");
+	const localStorageItem = localStorage.getItem(itemName);
 	//Revisar contenido en localStorage
-	let parsedTodos; //variable de guardar todos
+	let parsedItem; //variable de guardar todos
 
-	if (!localStorageTodos) {
+	if (!localStorageItem) {
 		//Si no hay nada en localStorage/no existe
-		localStorage.setItem("TODOS_V1", JSON.stringify(defaultTodos));
-		parsedTodos = defaultTodos;
+		localStorage.setItem(itemName, JSON.stringify(initialValue));
+		parsedItem = initialValue;
 	} else {
 		//Si tenemos contenido
 		//Convertir local storage en JS
-		parsedTodos = JSON.parse(localStorageTodos);
+		parsedItem = JSON.parse(localStorageItem);
 	}
 
-	//Estado de Todos
-	const [todos, setTodos] = React.useState(parsedTodos);
+	//Estado de nuestro Custom Hook
+	const [item, setItem] = React.useState(parsedItem);
 
 	//Funcion actualiza estado y localStorage de los todos
-	const saveTodos = (newTodos) => {
+	const saveItem = (newItem) => {
 		//guarda el nuevo array en localstorage
-		localStorage.setItem("TODOS_V1", JSON.stringify(newTodos));
+		localStorage.setItem(itemName, JSON.stringify(newItem));
 		//acutaliza el nuevo estado con el nuevo array
-		setTodos(newTodos);
+		setItem(newItem);
 	};
+
+	return [item, saveItem];
+}
+
+function App() {
+	//Estado de Todos
+	const [todos, saveTodos] = useLocalStorage("TODOS_V1", []);
 
 	//Estado del Componente TodoSearch
 	const [searchValue, setSearchValue] = React.useState("");
