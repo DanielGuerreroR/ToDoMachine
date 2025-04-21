@@ -1,10 +1,6 @@
 import React from "react";
-import { TodoCounter } from "../TodoCounter/TodoCounter";
-import { TodoSearch } from "../TodoSearch/TodoSearch";
-import { TodoList } from "../TodoList/TodoList";
-import { TodoItem } from "../TodoItem/TodoItem";
-import { CreateTodoButton } from "../CreateTodoButton/CreateTodoButton";
 import { useLocalStorage } from "./UseLocalStorage";
+import { AppUI } from "./AppUI";
 
 //Array con TODOS de prueba
 const defaultTodos = [
@@ -69,31 +65,15 @@ function App() {
 	};
 
 	return (
-		<>
-			{/* Estructura de la aplicacion */}
-
-			{/* Contador de to do */}
-			<TodoCounter completed={completedTodos} total={totalTodos} />
-
-			{/* Input de filtrar */}
-			<TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
-
-			{/* Lista de to do */}
-			<TodoList>
-				{searchedTodos.map((todo) => (
-					<TodoItem
-						key={todo.text}
-						text={todo.text}
-						completed={todo.completed}
-						onComplete={() => completeTodo(todo.text)}
-						onDelete={() => deleteTodo(todo.text)}
-					/>
-				))}
-			</TodoList>
-
-			{/* Creador de to do */}
-			<CreateTodoButton />
-		</>
+		<AppUI
+			completedTodos={completedTodos}
+			totalTodos={totalTodos}
+			searchValue={searchValue}
+			setSearchValue={setSearchValue}
+			searchedTodos={searchedTodos}
+			completeTodo={completeTodo}
+			deleteTodo={deleteTodo}
+		/>
 	);
 }
 
