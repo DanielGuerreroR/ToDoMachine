@@ -1,9 +1,10 @@
 import React from "react";
-import { TodoCounter } from "./TodoCounter/TodoCounter";
-import { TodoSearch } from "./TodoSearch/TodoSearch";
-import { TodoList } from "./TodoList/TodoList";
-import { TodoItem } from "./TodoItem/TodoItem";
-import { CreateTodoButton } from "./CreateTodoButton/CreateTodoButton";
+import { TodoCounter } from "../TodoCounter/TodoCounter";
+import { TodoSearch } from "../TodoSearch/TodoSearch";
+import { TodoList } from "../TodoList/TodoList";
+import { TodoItem } from "../TodoItem/TodoItem";
+import { CreateTodoButton } from "../CreateTodoButton/CreateTodoButton";
+import { useLocalStorage } from "./UseLocalStorage";
 
 //Array con TODOS de prueba
 const defaultTodos = [
@@ -18,39 +19,9 @@ const defaultTodos = [
 //Comando de borrar
 //localStorage.removeItem('TODOS_V1')
 
-function useLocalStorage(itemName, initialValue) {
-	//Variable para guardar elmentos de local storage
-	const localStorageItem = localStorage.getItem(itemName);
-	//Revisar contenido en localStorage
-	let parsedItem; //variable de guardar todos
-
-	if (!localStorageItem) {
-		//Si no hay nada en localStorage/no existe
-		localStorage.setItem(itemName, JSON.stringify(initialValue));
-		parsedItem = initialValue;
-	} else {
-		//Si tenemos contenido
-		//Convertir local storage en JS
-		parsedItem = JSON.parse(localStorageItem);
-	}
-
-	//Estado de nuestro Custom Hook
-	const [item, setItem] = React.useState(parsedItem);
-
-	//Funcion actualiza estado y localStorage de los todos
-	const saveItem = (newItem) => {
-		//guarda el nuevo array en localstorage
-		localStorage.setItem(itemName, JSON.stringify(newItem));
-		//acutaliza el nuevo estado con el nuevo array
-		setItem(newItem);
-	};
-
-	return [item, saveItem];
-}
-
 function App() {
 	//Estado de Todos
-	const [todos, saveTodos] = useLocalStorage("TODOS_V1", []);
+	const [todos, saveTodos] = useLocalStorage("TODOS_V1", defaultTodos);
 
 	//Estado del Componente TodoSearch
 	const [searchValue, setSearchValue] = React.useState("");
