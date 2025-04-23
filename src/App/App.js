@@ -3,13 +3,13 @@ import { useLocalStorage } from "./UseLocalStorage";
 import { AppUI } from "./AppUI";
 
 //Array con TODOS de prueba
-const defaultTodos = [
+/* const defaultTodos = [
 	{ text: "Cortar cebolla", completed: true },
 	{ text: "Tomar el curso de Intro a React.js", completed: false },
 	{ text: "Llorar con la llorona", completed: false },
 	{ text: "LALALALALALA", completed: false },
 	{ text: "usar estados derivados", completed: true },
-];
+]; */
 //Comando de crear
 //localStorage.setItem('TODOS_V1',defaultTodos)
 //Comando de borrar
@@ -17,7 +17,12 @@ const defaultTodos = [
 
 function App() {
 	//Estado de Todos
-	const [todos, saveTodos] = useLocalStorage("TODOS_V1", defaultTodos);
+	const {
+		item: todos,
+		saveItem: saveTodos,
+		loading,
+		error,
+	} = useLocalStorage("TODOS_V1", []);
 
 	//Estado del Componente TodoSearch
 	const [searchValue, setSearchValue] = React.useState("");
@@ -73,6 +78,8 @@ function App() {
 			searchedTodos={searchedTodos}
 			completeTodo={completeTodo}
 			deleteTodo={deleteTodo}
+			loading={loading}
+			error={error}
 		/>
 	);
 }
