@@ -1,7 +1,9 @@
 import "./TodoSearch.css";
 import React from "react";
 
-function TodoSearch({ searchValue, setSearchValue }) {
+function TodoSearch() {
+	const { searchValue, setSearchValue } = React.useContext(TodoContext);
+
 	return (
 		<input
 			placeholder="Cortar cebolla"
