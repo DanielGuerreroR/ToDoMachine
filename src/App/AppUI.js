@@ -1,3 +1,4 @@
+import React from "react";
 import { TodoCounter } from "../TodoCounter/TodoCounter";
 import { TodoSearch } from "../TodoSearch/TodoSearch";
 import { TodoList } from "../TodoList/TodoList";
@@ -6,12 +7,19 @@ import { CreateTodoButton } from "../CreateTodoButton/CreateTodoButton";
 import { TodosLoading } from "../TodosLoading/TodosLoading";
 import { TodosError } from "../TodosError/TodosError";
 import { EmptyTodos } from "../EmptyTodos/EmptyTodos";
+import { Modal } from "../Modal/Modal";
 import { TodoContext } from "../TodoContext/TodoContext";
-import React from "react";
 
 function AppUI() {
-	const { searchedTodos, completeTodo, deleteTodo, loading, error } =
-		React.useContext(TodoContext);
+	const {
+		searchedTodos,
+		completeTodo,
+		deleteTodo,
+		loading,
+		error,
+		openModal,
+		setOpenModal,
+	} = React.useContext(TodoContext);
 
 	return (
 		<>
@@ -42,8 +50,13 @@ function AppUI() {
 					/>
 				))}
 			</TodoList>
+
 			{/* Creador de to do */}
 			<CreateTodoButton />
+
+			{/* Modal para React Portals */}
+
+			{openModal && <Modal>La funciónalidad de agregar TODOS</Modal>}
 		</>
 	);
 }

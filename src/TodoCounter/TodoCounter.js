@@ -5,7 +5,7 @@ import { TodoContext } from "../TodoContext/TodoContext";
 function TodoCounter() {
 	const { completedTodos, totalTodos } = React.useContext(TodoContext);
 
-	if (total != completed) {
+	if (totalTodos != completedTodos) {
 		return (
 			<h1 className="TodoCounter">
 				Completaste <span>{completedTodos}</span> de <span>{totalTodos}</span>{" "}

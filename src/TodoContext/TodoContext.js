@@ -16,6 +16,9 @@ function TodoProvider({ children }) {
 	const [searchValue, setSearchValue] = React.useState("");
 	console.log("Los usuarios buscan todos de " + searchValue);
 
+	//Estado para abrir y cerrar modal
+	const [openModal, setOpenModal] = React.useState(false);
+
 	//ESTADOS DERIVADOS
 	//Todos completados
 	//Validamos el estado de completado de los todo y nos devolvera la longitud de array que nos devuelve como verdadero
@@ -58,7 +61,7 @@ function TodoProvider({ children }) {
 	};
 
 	return (
-		<Todocontext.Provider
+		<TodoContext.Provider
 			value={{
 				completedTodos,
 				totalTodos,
@@ -69,9 +72,11 @@ function TodoProvider({ children }) {
 				deleteTodo,
 				loading,
 				error,
+				openModal,
+				setOpenModal,
 			}}>
 			{children}
-		</Todocontext.Provider>
+		</TodoContext.Provider>
 	);
 }
 
