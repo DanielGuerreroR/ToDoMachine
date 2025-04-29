@@ -12,6 +12,7 @@
 	color: white;
 	margin: 12px;
 	cursor: pointer;
+	z-index: 1;
 
 	transform: rotate(0);
 	transition: 0.3s ease;

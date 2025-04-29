@@ -52,7 +52,7 @@ function AppUI() {
 			</TodoList>
 
 			{/* Creador de to do */}
-			<CreateTodoButton />
+			<CreateTodoButton setOpenModal={setOpenModal} />
 
 			{/* Modal para React Portals */}
 
