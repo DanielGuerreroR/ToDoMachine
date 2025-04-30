@@ -9,6 +9,7 @@ import { TodosError } from "../TodosError/TodosError";
 import { EmptyTodos } from "../EmptyTodos/EmptyTodos";
 import { Modal } from "../Modal/Modal";
 import { TodoContext } from "../TodoContext/TodoContext";
+import { TodoForm } from "../TodoFrom/TodoForm";
 
 function AppUI() {
 	const {
@@ -56,7 +57,11 @@ function AppUI() {
 
 			{/* Modal para React Portals */}
 
-			{openModal && <Modal>La funciónalidad de agregar TODOS</Modal>}
+			{openModal && (
+				<Modal>
+					<TodoForm />
+				</Modal>
+			)}
 		</>
 	);
 }

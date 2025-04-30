@@ -35,6 +35,19 @@ function TodoProvider({ children }) {
 		return todoText.includes(searchText);
 	});
 
+	//Funcion de añadir TODOs
+	const addTodo = (text) => {
+		//Nuevo array de todos
+		const newTodos = [...todos];
+		//Agregamos el nuevo todo a nuestro array
+		newTodos.push({
+			text,
+			completeda: false,
+		});
+		//Mandar nuevo array al actualizador
+		saveTodos(newTodos);
+	};
+
 	//Funcion actualizadora de estado
 	const completeTodo = (text) => {
 		//Nuevo array de todos
@@ -74,6 +87,7 @@ function TodoProvider({ children }) {
 				error,
 				openModal,
 				setOpenModal,
+				addTodo,
 			}}>
 			{children}
 		</TodoContext.Provider>
